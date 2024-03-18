@@ -21,8 +21,8 @@ app.get("/", (_, response) => {
 });
 
 app.use("/api", ApiRouter);
-
 app.use("/files", express.static("files"));
+app.options("*", cors(corsOptions));
 
 app.listen(4000, () => {
   console.log("Server running at port 4000");
