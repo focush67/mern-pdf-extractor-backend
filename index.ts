@@ -8,9 +8,9 @@ import { corsOptions } from "./utilities/cors-options";
 config();
 
 const app = express();
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
 
 app.get("/", (_, response) => {
   console.log("Home page accessed");
