@@ -9,8 +9,8 @@ config();
 
 const app = express();
 app.use(cors(corsOptions));
-app.use(express.json());
 app.use(cookieParser());
+app.use(express.json());
 
 app.get("/", (_, response) => {
   console.log("Home page accessed");

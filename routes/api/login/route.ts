@@ -8,6 +8,7 @@ config();
 
 router.get("/", async (request, response) => {
   const token = request.cookies.token;
+  console.log("Token at /login get: ", token);
   try {
     const profile = await verifyToken(token);
     return response.json({
@@ -37,6 +38,7 @@ router.post("/", async (request, response) => {
   }
 
   const { token, responseUser } = result;
+  console.log("Generated Token: ", token);
   return response.cookie("token", token).json({
     message: "Returning the user",
     status: 200,
