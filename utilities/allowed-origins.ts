@@ -3,4 +3,5 @@ export const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3002",
   "https://mern-pdf-extractor-frontend.vercel.app",
+  "https://mern-pdf-extractor-frontend.onrender.com/",
 ];
