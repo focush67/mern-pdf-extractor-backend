@@ -38,6 +38,7 @@ router.post("/", async (request, response) => {
   }
 
   const { token, responseUser } = result;
+  console.log("Token generated at /login post ", token);
   return response.cookie("token", token).json({
     message: "Returning the user",
     status: 200,
