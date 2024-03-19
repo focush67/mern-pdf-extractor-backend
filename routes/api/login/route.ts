@@ -38,11 +38,16 @@ router.post("/", async (request, response) => {
   }
 
   const { token, responseUser } = result;
-  return response.cookie("token", token, { secure: true }).json({
-    message: "Returning the user",
-    status: 200,
-    user: responseUser,
-  });
+  return response
+    .cookie("token", token, {
+      secure: true,
+      domain: "https://mern-pdf-extractor-frontend.vercel.app/",
+    })
+    .json({
+      message: "Returning the user",
+      status: 200,
+      user: responseUser,
+    });
 });
 
 router.delete("/", (_, response) => {
