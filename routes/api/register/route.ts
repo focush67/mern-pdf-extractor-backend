@@ -17,7 +17,7 @@ router.post("/", async (request, response) => {
 
   const { token, responseUser } = result;
 
-  return response.cookie("token", token).json({
+  return response.cookie("token", token, { secure: true }).json({
     message: "User registered successfully",
     status: 200,
     user: responseUser,
