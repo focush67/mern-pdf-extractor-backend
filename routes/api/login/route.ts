@@ -38,10 +38,11 @@ router.post("/", async (request, response) => {
   }
 
   const { token, responseUser } = result;
+  console.log({ token, responseUser });
   return response
     .cookie("auth_token", token, {
       secure: true,
-      domain: "https://mern-pdf-extractor-frontend.vercel.app",
+      domain: ".vercel.app",
     })
     .json({
       message: "Returning the user",
