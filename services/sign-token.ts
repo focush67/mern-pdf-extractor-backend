@@ -55,7 +55,7 @@ export default async function signToken(username: string, password: string) {
       return null;
     }
   } catch (error: any) {
-    console.log("Error:", error.message);
+    console.log("Error signing token ", error.message);
     return null;
   }
 }
