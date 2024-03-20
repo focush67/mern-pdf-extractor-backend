@@ -30,6 +30,6 @@ export const verifyToken = async (token: string) => {
 
     return user;
   } catch (error: any) {
-    console.log("Error in verification token: ", error.message);
+    console.log("Error in verification token: ", error);
   }
 };
