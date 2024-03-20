@@ -17,11 +17,16 @@ router.post("/", async (request, response) => {
 
   const { token, responseUser } = result;
 
-  return response.cookie("token", token, { secure: true }).json({
-    message: "User registered successfully",
-    status: 200,
-    user: responseUser,
-  });
+  return response
+    .cookie("token", token, {
+      secure: true,
+      domain: "https://mern-pdf-extractor-frontend.vercel.app/",
+    })
+    .json({
+      message: "User registered successfully",
+      status: 200,
+      user: responseUser,
+    });
 });
 
 export default router;
