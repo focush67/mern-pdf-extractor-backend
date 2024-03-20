@@ -38,11 +38,11 @@ router.post("/", async (request, response) => {
   }
 
   const { token, responseUser } = result;
-  console.log({ token, responseUser });
   return response
     .cookie("auth_token", token, {
       secure: true,
       domain: ".vercel.app",
+      maxAge: 50000,
     })
     .json({
       message: "Returning the user",
