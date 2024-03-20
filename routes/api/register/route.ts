@@ -20,7 +20,7 @@ router.post("/", async (request, response) => {
   return response
     .cookie("auth_token", token, {
       secure: true,
-      domain: "https://mern-pdf-extractor-frontend.vercel.app/",
+      domain: "https://mern-pdf-extractor-frontend.vercel.app",
     })
     .json({
       message: "User registered successfully",
