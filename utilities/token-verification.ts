@@ -9,6 +9,7 @@ const secret = process.env.JWT_SECRET!;
 export const verifyToken = async (token: string) => {
   try {
     const { id } = jwt.verify(token, secret) as { id: string };
+    console.log("ID Encountered: ", id);
     if (!id) {
       console.log("Verification failed ", id);
       return null;
@@ -30,6 +31,7 @@ export const verifyToken = async (token: string) => {
 
     return user;
   } catch (error: any) {
+    console.log("Token: ", token);
     console.log("Error in verification token: ", error);
   }
 };
