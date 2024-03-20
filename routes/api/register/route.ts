@@ -18,7 +18,7 @@ router.post("/", async (request, response) => {
   const { token, responseUser } = result;
 
   return response
-    .cookie("token", token, {
+    .cookie("auth_token", token, {
       secure: true,
       domain: "https://mern-pdf-extractor-frontend.vercel.app/",
     })

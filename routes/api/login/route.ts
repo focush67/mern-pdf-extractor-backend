@@ -7,7 +7,7 @@ const router = Router();
 config();
 
 router.get("/", async (request, response) => {
-  const token = request.cookies.token as string;
+  const token = request.cookies.auth_token as string;
   console.log("Token at /login get: ", token);
   try {
     const profile = await verifyToken(token);
@@ -38,15 +38,20 @@ router.post("/", async (request, response) => {
   }
 
   const { token, responseUser } = result;
-  return response.cookie("token", token).json({
-    message: "Returning the user",
-    status: 200,
-    user: responseUser,
-  });
+  return response
+    .cookie("auth_token", token, {
+      secure: true,
+      domain: "https://mern-pdf-extractor-frontend.vercel.app/",
+    })
+    .json({
+      message: "Returning the user",
+      status: 200,
+      user: responseUser,
+    });
 });
 
 router.delete("/", (_, response) => {
-  response.clearCookie("token");
+  response.clearCookie("auth_token");
   return response.json({
     message: "Logged Out",
     status: 200,
