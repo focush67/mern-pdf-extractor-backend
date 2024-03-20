@@ -48,6 +48,7 @@ router.post("/", async (request, response) => {
       message: "Returning the user",
       status: 200,
       user: responseUser,
+      token: token,
     });
 });
 

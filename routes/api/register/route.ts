@@ -26,6 +26,7 @@ router.post("/", async (request, response) => {
       message: "User registered successfully",
       status: 200,
       user: responseUser,
+      token: token,
     });
 });
 
