@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.get("/", async (request, response) => {
-  const profile = (await verifyToken(request.cookies.token)) as User;
+  const profile = (await verifyToken(request.cookies.auth_token)) as User;
   try {
     const pdfs = await db.pDF.findMany({
       where: {
@@ -43,7 +43,7 @@ router.get("/", async (request, response) => {
 router.post("/", upload.single("file"), async (request, response) => {
   const fileName = request.file?.filename;
   const title = request.body.title;
-  const ownerId = request.body.ownerId;
+  const ownerId = request.body.ownerId || "65faee7ba4b9d5e09e656dfd";
   const url = request.body.url;
   try {
     const newPdf = await db.pDF.create({
