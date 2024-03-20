@@ -48,7 +48,7 @@ export default async function registerUser(
     };
 
     return {
-      token,
+      token: token,
       responseUser,
     };
   } catch (error: any) {
