@@ -1,26 +1,27 @@
 import { Router } from "express";
-import { verifyToken } from "../../../utilities/token-verification";
 import { config } from "dotenv";
 import signToken from "../../../services/sign-token";
+import { extractToken } from "../../../utilities/extract";
+import { verifyToken } from "../../../utilities/token-verification";
 const router = Router();
 
 config();
 
-router.get("/", async (request, response) => {
-  const token = request.cookies.auth_token as string;
-  console.log("Token at /login get: ", token);
+router.get("/:token", async (request, response) => {
+  const token = request.params.token;
+  const extracted = extractToken(token);
   try {
-    const profile = await verifyToken(token);
+    const result = await verifyToken(extracted);
     return response.json({
-      user: profile,
+      message: "Returning User",
       status: 200,
+      user: result,
     });
   } catch (error: any) {
     console.log(error.message);
     return response.json({
-      message: "Error occured at JWT Authentication at /login",
-      status: 405,
-      error: error.message,
+      message: "Error at /login",
+      status: 200,
     });
   }
 });
@@ -36,27 +37,12 @@ router.post("/", async (request, response) => {
       status: 405,
     });
   }
-
   const { token, responseUser } = result;
-  return response
-    .cookie("auth_token", token, {
-      secure: true,
-      domain: ".vercel.app",
-      maxAge: 50000,
-    })
-    .json({
-      message: "Returning the user",
-      status: 200,
-      user: responseUser,
-      token: token,
-    });
-});
-
-router.delete("/", (_, response) => {
-  response.clearCookie("auth_token");
   return response.json({
-    message: "Logged Out",
+    message: "Returning the user",
     status: 200,
+    user: responseUser,
+    token: token,
   });
 });
 

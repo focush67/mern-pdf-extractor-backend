@@ -3,6 +3,7 @@ import { db } from "../../../utilities/database";
 import multer from "multer";
 import { verifyToken } from "../../../utilities/token-verification";
 import { User } from "@prisma/client";
+import { extractToken } from "../../../utilities/extract";
 const router = Router();
 
 const storage = multer.diskStorage({
@@ -17,8 +18,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.get("/", async (request, response) => {
-  const profile = (await verifyToken(request.cookies.auth_token)) as User;
+router.get("/:token", async (request, response) => {
+  const token = request.params.token;
+  const extractedToken = extractToken(token);
+  const profile = (await verifyToken(extractedToken)) as User;
   try {
     const pdfs = await db.pDF.findMany({
       where: {

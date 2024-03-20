@@ -17,17 +17,12 @@ router.post("/", async (request, response) => {
 
   const { token, responseUser } = result;
 
-  return response
-    .cookie("auth_token", token, {
-      secure: true,
-      domain: ".vercel.app",
-    })
-    .json({
-      message: "User registered successfully",
-      status: 200,
-      user: responseUser,
-      token: token,
-    });
+  return response.json({
+    message: "User registered successfully",
+    status: 200,
+    user: responseUser,
+    token: token,
+  });
 });
 
 export default router;
