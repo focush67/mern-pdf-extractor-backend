@@ -21,6 +21,8 @@ To get started with the project, follow these steps:
 4. Get a MongoDB instance, and initialize your PrismaClient using `npx prisma generate`, and then push the changes by running `npx prisma db push`
 5. Start the server by running `npm run dev`
 
+## Issues
+The appication does the required tasks locally, however the render environment doesn't allow disk storage without a paid subscription, due to which file uploads on the server are not possible. However they are possible locally.
 
 ## Contact
 - Email: [sparshv70@gmail.com](mailto:sparshv70@gmail.com)
